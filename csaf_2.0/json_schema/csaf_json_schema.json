@@ -711,6 +711,11 @@
                 "title": "Last affected",
                 "description": "This is the last version in a release train known to be affected by the vulnerability. Subsequently released versions would contain a fix for the vulnerability.",
                 "$ref": "#/definitions/products_t"
+              },
+              "under_investigation": {
+                "title": "Under investigation",
+                "description": "It is not known yet whether this version is or is not affected by the vulnerability. However, it is still under investigation - the result will be provided in a later release of the document.",
+                "$ref": "#/definitions/products_t"
               }
             }
           },
