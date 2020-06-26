@@ -7,6 +7,7 @@
   "definitions": {
     "acknowledgment_t": {
       "type": "object",
+      "minProperties": 1,
       "properties": {
         "names": {
           "title": "Names of entities being recognized",
@@ -294,6 +295,7 @@
           "title": "Rules for sharing document",
           "description": "Describe any constraints on how this document might be shared.",
           "type": "object",
+          "minProperties": 1,
           "properties": {
             "text": {
               "title": "Description",
@@ -434,6 +436,7 @@
             },
             "generator": {
               "type": "object",
+              "minProperties": 1,
               "properties": {
                 "engine": {
                   "type": "string"
@@ -500,6 +503,7 @@
     "product_tree": {
       "$comment": "Currently only supports branch_t and full_product_name_t children of product_tree",
       "type": "object",
+      "minProperties": 1,
       "properties": {
         "branches": {
           "type": "array",
@@ -592,6 +596,7 @@
         "title": "Vulnerability",
         "description": "Is a container for the aggregation of all fields that are related to a single vulnerability in the document.",
         "type": "object",
+        "minProperties": 1,
         "properties": {
           "acknowledgments": {
             "type": "array",
