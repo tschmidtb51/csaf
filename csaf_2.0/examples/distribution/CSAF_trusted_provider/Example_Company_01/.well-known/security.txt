@@ -1,0 +1,4 @@
+Contact: mailto:psirt@example.com
+Expires: 2022-11-01T11:00:00.000Z
+Encryption: https://www.example.com/vks/v1/by-fingerprint/F5388C81935DD28B4A6D0E192360ED8A86C21A5C
+CSAF: https://www.example.com/.well-known/csaf/provider-metadata.json

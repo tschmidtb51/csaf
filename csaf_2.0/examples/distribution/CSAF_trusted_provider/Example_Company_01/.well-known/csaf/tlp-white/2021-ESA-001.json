@@ -1,0 +1,128 @@
+{
+  "document": {
+    "category": "generic_csaf",
+    "csaf_version": "2.0",
+    "publisher": {
+      "category": "vendor",
+      "name": "Example Company 01 ProductCERT",
+      "namespace": "https://psirt.example.com"
+    },
+    "title": "Example Security Advisory 001",
+    "tracking": {
+      "current_release_date": "2021-02-01T12:00:00.000Z",
+      "generator": {
+        "date": "2021-11-01T11:00:00.000Z",
+        "engine": {
+          "name": "Secvisogram",
+          "version": "1.8.0"
+        }
+      },
+      "id": "2021-ESA-001",
+      "initial_release_date": "2021-01-01T11:00:00.000Z",
+      "revision_history": [
+        {
+          "date": "2021-01-01T11:00:00.000Z",
+          "number": "1",
+          "summary": "Initial version."
+        },
+        {
+          "date": "2021-02-01T11:00:00.000Z",
+          "number": "2",
+          "summary": "Patch added for product ABC."
+        }
+      ],
+      "status": "final",
+      "version": "2"
+    }
+  },
+  "product_tree": {
+    "branches": [
+      {
+        "branches": [
+          {
+            "branches": [
+              {
+                "branches": [
+                  {
+                    "category": "patch_level",
+                    "name": "0",
+                    "product": {
+                      "name": "Example Company 01 ABC 4.2.0",
+                      "product_id": "CSAFPID-0001"
+                    }
+                  },
+                  {
+                    "category": "patch_level",
+                    "name": "1",
+                    "product": {
+                      "name": "Example Company 01 ABC 4.2.1",
+                      "product_id": "CSAFPID-0002"
+                    }
+                  }
+                ],
+                "category": "product_version",
+                "name": "4.2"
+              }
+            ],
+            "category": "product_name",
+            "name": "ABC"
+          }
+        ],
+        "category": "vendor",
+        "name": "Example Company 01"
+      }
+    ]
+  },
+  "vulnerabilities": [
+    {
+      "cwe": {
+        "id": "CWE-321",
+        "name": "Use of Hard-coded Cryptographic Key"
+      },
+      "notes": [
+        {
+          "category": "summary",
+          "text": "An attacker with local network access can obtain a fixed cryptography key which may allow for further compromise of ABC outside of local network access."
+        }
+      ],
+      "product_status": {
+        "fixed": [
+          "CSAFPID-0002"
+        ],
+        "known_affected": [
+          "CSAFPID-0001"
+        ]
+      },
+      "remediations": [
+        {
+          "category": "vendor_fix",
+          "details": "Update to the latest firmware.",
+          "product_ids": [
+            "CSAFPID-0001"
+          ]
+        }
+      ],
+      "scores": [
+        {
+          "cvss_v3": {
+            "attackComplexity": "LOW",
+            "attackVector": "LOCAL",
+            "availabilityImpact": "NONE",
+            "baseScore": 7.7,
+            "baseSeverity": "HIGH",
+            "confidentialityImpact": "HIGH",
+            "integrityImpact": "HIGH",
+            "privilegesRequired": "NONE",
+            "scope": "UNCHANGED",
+            "userInteraction": "NONE",
+            "vectorString": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N",
+            "version": "3.1"
+          },
+          "products": [
+            "CSAFPID-0001"
+          ]
+        }
+      ]
+    }
+  ]
+}
