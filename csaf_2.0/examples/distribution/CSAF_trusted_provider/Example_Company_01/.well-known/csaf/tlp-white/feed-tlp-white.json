@@ -38,6 +38,29 @@
           "schema": "https://docs.oasis-open.org/csaf/csaf/v2.0/csaf_json_schema.json",
           "version": "2.0"
         }
+      },
+      {
+        "id": "2021-ESA-002",
+        "title": "Example Security Advisory 002",
+        "link": [
+          {
+            "rel": "self",
+            "href": "https://www.example.com/.well-known/csaf/tlp-white/2021-ESA-002.json"
+          }
+        ],
+        "published": "2021-11-01T12:00:00.000Z",
+        "updated": "2021-11-01T12:00:00.000Z",
+        "summary": {
+          "content": "Vulnerability fixed in DEF 8.5 SP 1"
+        },
+        "content": {
+          "type": "application/json",
+          "src": "https://www.example.com/.well-known/csaf/tlp-white/2021-ESA-002.json"
+        },
+        "format": {
+          "schema": "https://docs.oasis-open.org/csaf/csaf/v2.0/csaf_json_schema.json",
+          "version": "2.0"
+        }
       }
     ]
   }

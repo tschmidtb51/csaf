@@ -1,0 +1,164 @@
+{
+  "document": {
+    "category": "generic_csaf",
+    "csaf_version": "2.0",
+    "publisher": {
+      "category": "vendor",
+      "name": "Example Company 01 ProductCERT",
+      "namespace": "https://psirt.example.com"
+    },
+    "title": "Example Security Advisory 002",
+    "tracking": {
+      "current_release_date": "2021-11-01T12:00:00.000Z",
+      "generator": {
+        "date": "2021-11-01T12:00:00.000Z",
+        "engine": {
+          "name": "Secvisogram",
+          "version": "1.8.0"
+        }
+      },
+      "id": "2021-ESA-002",
+      "initial_release_date": "2021-11-01T12:00:00.000Z",
+      "revision_history": [
+        {
+          "date": "2021-11-01T12:00:00.000Z",
+          "number": "1",
+          "summary": "Initial version."
+        }
+      ],
+      "status": "final",
+      "version": "1"
+    }
+  },
+  "product_tree": {
+    "branches": [
+      {
+        "branches": [
+          {
+            "branches": [
+              {
+                "branches": [
+                  {
+                    "category": "service_pack",
+                    "name": "none",
+                    "product": {
+                      "name": "Example Company 01 DEF 8.5",
+                      "product_id": "CSAFPID-0001"
+                    }
+                  },
+                  {
+                    "category": "service_pack",
+                    "name": "1",
+                    "product": {
+                      "name": "Example Company 01 DEF 8.5 SP 1",
+                      "product_id": "CSAFPID-0002"
+                    }
+                  }
+                ],
+                "category": "product_version",
+                "name": "8.5"
+              }
+            ],
+            "category": "product_name",
+            "name": "DEF"
+          }
+        ],
+        "category": "vendor",
+        "name": "Example Company 01"
+      }
+    ]
+  },
+  "vulnerabilities": [
+    {
+      "cwe": {
+        "id": "CWE-822",
+        "name": "Untrusted Pointer Dereference"
+      },
+      "notes": [
+        {
+          "category": "summary",
+          "text": "An untrusted pointer dereference has been identified in the way the application processes project files, allowing an attacker to craft a special project file that may permit arbitrary code execution."
+        }
+      ],
+      "product_status": {
+        "fixed": [
+          "CSAFPID-0002"
+        ],
+        "known_affected": [
+          "CSAFPID-0001"
+        ]
+      },
+      "remediations": [
+        {
+          "category": "vendor_fix",
+          "details": "Update to the latest service pack.",
+          "product_ids": [
+            "CSAFPID-0001"
+          ]
+        }
+      ],
+      "scores": [
+        {
+          "cvss_v3": {
+            "attackComplexity": "LOW",
+            "attackVector": "LOCAL",
+            "availabilityImpact": "HIGH",
+            "baseScore": 7.8,
+            "baseSeverity": "HIGH",
+            "confidentialityImpact": "HIGH",
+            "integrityImpact": "HIGH",
+            "privilegesRequired": "NONE",
+            "scope": "UNCHANGED",
+            "userInteraction": "REQUIRED",
+            "vectorString": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+            "version": "3.1"
+          },
+          "products": [
+            "CSAFPID-0001"
+          ]
+        }
+      ]
+    },
+    {
+      "cwe": {
+        "id": "CWE-416",
+        "name": "Use After Free"
+      },
+      "notes": [
+        {
+          "category": "summary",
+          "text": "A use after free issue has been identified in the way the application processes project files, allowing an attacker to craft a special project file that may allow arbitrary code execution."
+        }
+      ],
+      "product_status": {
+        "fixed": [
+          "CSAFPID-0002"
+        ],
+        "known_affected": [
+          "CSAFPID-0001"
+        ]
+      },
+      "scores": [
+        {
+          "cvss_v3": {
+            "attackComplexity": "LOW",
+            "attackVector": "LOCAL",
+            "availabilityImpact": "HIGH",
+            "baseScore": 7.8,
+            "baseSeverity": "HIGH",
+            "confidentialityImpact": "HIGH",
+            "integrityImpact": "HIGH",
+            "privilegesRequired": "NONE",
+            "scope": "UNCHANGED",
+            "userInteraction": "REQUIRED",
+            "vectorString": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+            "version": "3.1"
+          },
+          "products": [
+            "CSAFPID-0001"
+          ]
+        }
+      ]
+    }
+  ]
+}
