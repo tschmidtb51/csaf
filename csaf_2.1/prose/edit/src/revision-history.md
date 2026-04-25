@@ -26,5 +26,6 @@
 | csaf-v2.1-wd20251217-dev | 2025-12-17 | Stefan Hagen and Thomas Schmidt | Editor Revision for CSD02                   |
 | csaf-v2.1-wd20260128-dev | 2026-01-28 | Stefan Hagen and Thomas Schmidt | Editor Revision for CSD02                   |
 | csaf-v2.1-wd20260225-dev | 2026-02-25 | Stefan Hagen and Thomas Schmidt | Editor Revision for CSD02                   |
+| csaf-v2.1-wd20260429-dev | 2026-04-29 | Stefan Hagen and Thomas Schmidt | Editor Revision for CSD02                   |
 
 -------
