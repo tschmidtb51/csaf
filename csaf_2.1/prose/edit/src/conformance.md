@@ -940,7 +940,7 @@ Secondly, the program fulfills the following for all items of:
   the CSAF 2.0 to CSAF 2.1 Converter SHOULD provide an option to use this label instead.
 
   If the TLP label changes during such a conversion in a way not listed in the table above,
-  the CSAF 2.0 to CSAF 2.1 Converter MUST issue a warning that the TLP label was taken from the distribution text.
+  the CSAF 2.0 to CSAF 2.1 Converter MUST output a warning that the TLP label was taken from the distribution text.
   This warning MUST include both values: the value converted using the table and the value from the distribution text.
 
   > This is a common case for CSAF 2.0 Documents labeled as `TLP:RED` but actually intended to be `TLP:AMBER+STRICT`.
