@@ -854,6 +854,11 @@ Secondly, the program fulfills the following for all items of:
 * type `/$defs/full_product_name_t/product_identification_helper/hashes[]/file_hashes[]/value`: The CSAF 2.0 to CSAF 2.1 Converter MUST convert
   the value into a lowercase string.
 * type `/$defs/full_product_name_t/product_identification_helper/model_numbers[]`:
+
+  > The values were implicit open ended in CSAF 2.0 which resulted in ambiguity.
+  > A fix length matching was not possible.
+  > CSAF 2.1 requires to state explicitly with a `*` at the end, if a value is to be interpreted as "starts with".
+
   * If a model number is given that does not end on a star, the CSAF 2.0 to CSAF 2.1 Converter SHOULD add a `*` to the end and output a
     warning that a partial model number was detected and a star has been added.
     Such a warning MUST include the model number.
@@ -871,6 +876,11 @@ Secondly, the program fulfills the following for all items of:
 * type `/$defs/full_product_name_t/product_identification_helper/purls`: If a `/$defs/full_product_name_t/product_identification_helper/purl` is given,
   the CSAF 2.0 to CSAF 2.1 Converter MUST convert it into the first item of the corresponding `purls` array.
 * type `/$defs/full_product_name_t/product_identification_helper/serial_numbers[]`:
+
+  > The values were implicit open ended in CSAF 2.0 which resulted in ambiguity.
+  > A fix length matching was not possible.
+  > CSAF 2.1 requires to state explicitly with a `*` at the end, if a value is to be interpreted as "starts with".
+
   * If a serial number is given that does not end on a star, the CSAF 2.0 to CSAF 2.1 Converter SHOULD add a `*` to the end and output a
     warning that a partial serial number was detected and a star has been added.
     Such a warning MUST include the serial number.
@@ -886,6 +896,11 @@ Secondly, the program fulfills the following for all items of:
   > A tool MAY provide a non-default option to interpret the `*` in all serial numbers as part of the serial number itself and therefore escape it.
 
 * type `/$defs/full_product_name_t/product_identification_helper/skus[]`:
+  
+  > The values were implicit open ended in CSAF 2.0 which resulted in ambiguity.
+  > A fix length matching was not possible.
+  > CSAF 2.1 requires to state explicitly with a `*` at the end, if a value is to be interpreted as "starts with".
+
   * If a stock keeping unit is given that does not end on a star, the CSAF 2.0 to CSAF 2.1 Converter SHOULD add a `*` to the end and output a
     warning that a partial stock keeping unit was detected and a star has been added.
     Such a warning MUST include the stock keeping unit.
