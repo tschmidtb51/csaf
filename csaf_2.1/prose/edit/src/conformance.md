@@ -125,7 +125,8 @@ Firstly, the program:
 * outputs a warning that an additional property was detected and not converted if it detects an additional property in the input.
   Such a warning MUST include the additional property and its path.
   The CVRF CSAF Converter SHALL ignore that additional property during the conversion.
-* includes in every warning the relevant paths and values ​​from the original file that triggered the alert, unless otherwise specified in this standard.
+* includes in every every error and warning the relevant paths and values ​​from the original file that triggered the alert,
+  unless otherwise specified in this standard.
 * additionally satisfies the normative requirements given below.
 
 Secondly, the program fulfills the following for all items of:
@@ -204,7 +205,7 @@ Secondly, the program fulfills the following for all items of:
   In addition, it SHOULD also present all values of `xml:lang` attributes as a set in the warning.
 * `/document/license_expression`: If any `cvrf:Note` item with `Type` `Legal Disclaimer` contains a valid SPDX license expression,
   the CVRF CSAF Converter SHALL convert this value into `license_expression`.
-  In addition, the converter outputs an information that license expression was found and set as document license expression.
+  In addition, the converter outputs a warning that license expression was found and set as document license expression.
 * `/document/notes`: If any `cvrf:Note` item contains one of the `category` and `title` combinations specified in [sec](#document-property---notes),
   where the `title` is extended, the CVRF CSAF Converter SHALL try to identify whether that extension is a specific product name, version or family.
   In such case, the CVRF CSAF Converter SHALL try to add the corresponding products to the note item and output a warning that a potential product
@@ -274,7 +275,7 @@ Secondly, the program fulfills the following for all items of:
 
   * If the `system_name` does not belong to an RVISC entry, the CVRF CSAF Converter MUST try to convert the entry based on the
     mapping given in [cite](#RVISC-M).
-    * If no matching mapping exists, the CVRF CSAF Converter MUST output an information that an ID from a potentially
+    * If no matching mapping exists, the CVRF CSAF Converter MUST output a warning that an ID from a potentially
       unregistered vulnerability system was detected and no change occurred.
     * If the mapping succeeds and passes test [sec](#matching-text-for-registered-id-system), the CVRF CSAF Converter MUST
       output a warning that an ID from a vulnerability system with a known mapping was detected and converted.
@@ -722,7 +723,8 @@ Firstly, the program:
 * outputs a warning that an additional property was detected and not converted if it detects an additional property in the input.
   Such a warning MUST include the additional property and its path.
   The CSAF 2.0 to CSAF 2.1 Converter SHALL ignore that additional property during the conversion.
-* includes in every warning the relevant paths and values ​​from the original file that triggered the alert, unless otherwise specified in this standard.
+* includes in every error and warning the relevant paths and values ​​from the original file that triggered the alert,
+  unless otherwise specified in this standard.
 * additionally satisfies the normative requirements given below.
 
 Secondly, the program fulfills the following for all items of:
@@ -946,7 +948,7 @@ Secondly, the program fulfills the following for all items of:
   If no TLP label was given, the CSAF 2.0 to CSAF 2.1 Converter SHOULD assign `TLP:CLEAR` and output a warning that the default TLP has been set.
 * `/document/license_expression`: If any `/document/notes` item in with `category` `legal_disclaimer` contains a valid SPDX license expression,
   the CSAF 2.0 to CSAF 2.1 Converter SHALL convert this value into `license_expression`.
-  In addition, the converter outputs an information that license expression was found and set as document license expression.
+  In addition, the converter outputs a warning that license expression was found and set as document license expression.
 * `/document/notes`: If any `/document/notes` item contains one of the `category` and `title` combinations specified in
   [sec](#document-property---notes), where the `title` is extended, the CSAF 2.0 to CSAF 2.1 Converter SHALL try to identify whether that extension
   is a specific product name, version or family.
@@ -1009,7 +1011,7 @@ Secondly, the program fulfills the following for all items of:
 
   * If the `system_name` does not belong to an RVISC entry, the CSAF 2.0 to CSAF 2.1 Converter MUST try to convert the entry based on the
     mapping given in [cite](#RVISC-M).
-    * If no matching mapping exists, the CSAF 2.0 to CSAF 2.1 Converter MUST output an information that an ID from a potentially
+    * If no matching mapping exists, the CSAF 2.0 to CSAF 2.1 Converter MUST output a warning that an ID from a potentially
       unregistered vulnerability system was detected and no change occurred.
     * If the mapping succeeds and passes test [sec](#matching-text-for-registered-id-system), the CSAF 2.0 to CSAF 2.1 Converter MUST
       output a warning that an ID from a vulnerability system with a known mapping was detected and converted.
