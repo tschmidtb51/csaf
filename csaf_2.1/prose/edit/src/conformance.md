@@ -205,9 +205,9 @@ Secondly, the program fulfills the following for all items of:
   In addition, it SHOULD also present all values of `xml:lang` attributes as a set in the warning.
 * `/document/license_expression`: If any `cvrf:Note` item with `Type` `Legal Disclaimer` contains valid SPDX license expressions,
   the CVRF CSAF Converter SHALL apply the following rules to the list of candidates:
-  * If the list contains only one element, the CVRF CSAF Converter SHALL convert this value to `license_expression`.
-    In addition, the converter issues a warning that a license expression was found and set as the document license expression.
-  * If multiple SPDX license expressions are found, the CVRF CSAF Converter must issue a warning that multiple SPDX license expressions were found
+  * If the list contains only one element, the CVRF CSAF Converter SHALL set this value as value of `license_expression`.
+    In addition, the converter outputs a warning that a license expression was found and set as the document license expression.
+  * If multiple SPDX license expressions are found, the CVRF CSAF Converter outputs a warning that multiple SPDX license expressions were found
     and therefore no document license expression could be determined.
     This warning MUST include the list of all SPDX license expressions and their associated paths.
 
@@ -947,12 +947,12 @@ Secondly, the program fulfills the following for all items of:
 
   If no TLP label was given, the CSAF 2.0 to CSAF 2.1 Converter SHOULD assign `TLP:CLEAR` and output a warning that the default TLP has been set.
 * `/document/license_expression`: If any `/document/notes` item in with `category` `legal_disclaimer` contains a valid SPDX license expression,
-  the CSAF 2.0 to CSAF 2.1 Converter apply the following rules for the list of candidates:
-  * If this list has a length of one, the CSAF 2.0 to CSAF 2.1 Converter SHALL convert this value into `license_expression`.
+  the CSAF 2.0 to CSAF 2.1 Converter SHALL apply the following rules for the list of candidates:
+  * If this list contains only one element, the CSAF 2.0 to CSAF 2.1 Converter SHALL set this value as value of `license_expression`.
     In addition, the converter outputs a warning that license expression was found and set as document license expression.
-  * If multiple SPDX license expressions are found, the CSAF 2.0 to CSAF 2.1 Converter SHALL output a warning that multiple
+  * If multiple SPDX license expressions are found, the CSAF 2.0 to CSAF 2.1 Converter outputs a warning that multiple
     SPDX license expressions were found and therefore no document license expression could be determined.
-    Such a warning MUST include the list of all SPDX license expressions as well as corresponding paths.
+    Such a warning MUST include the list of all SPDX license expressions and their associated paths.
 
   > A tool MAY implement an option to suppress this conversion.
 
