@@ -855,9 +855,9 @@ Secondly, the program fulfills the following for all items of:
   the value into a lowercase string.
 * type `/$defs/full_product_name_t/product_identification_helper/model_numbers[]`:
 
-  > The values were implicit open ended in CSAF 2.0 which resulted in ambiguity.
-  > A fix length matching was not possible.
-  > CSAF 2.1 requires to state explicitly with a `*` at the end, if a value is to be interpreted as "starts with".
+  > The values were implicitly open ended in CSAF 2.0 which resulted in ambiguity.
+  > A fixed-length matching was not possible.
+  > CSAF 2.1 requires that values ​​intended to be interpreted as "starts with" be explicitly marked with an asterisk (`*`) at the end.
 
   * If a model number is given that does not end on a star, the CSAF 2.0 to CSAF 2.1 Converter SHOULD add a `*` to the end and output a
     warning that a partial model number was detected and a star has been added.
@@ -877,9 +877,9 @@ Secondly, the program fulfills the following for all items of:
   the CSAF 2.0 to CSAF 2.1 Converter MUST convert it into the first item of the corresponding `purls` array.
 * type `/$defs/full_product_name_t/product_identification_helper/serial_numbers[]`:
 
-  > The values were implicit open ended in CSAF 2.0 which resulted in ambiguity.
-  > A fix length matching was not possible.
-  > CSAF 2.1 requires to state explicitly with a `*` at the end, if a value is to be interpreted as "starts with".
+  > The values were implicitly open ended in CSAF 2.0 which resulted in ambiguity.
+  > A fixed-length matching was not possible.
+  > CSAF 2.1 requires that values ​​intended to be interpreted as "starts with" be explicitly marked with an asterisk (`*`) at the end.
 
   * If a serial number is given that does not end on a star, the CSAF 2.0 to CSAF 2.1 Converter SHOULD add a `*` to the end and output a
     warning that a partial serial number was detected and a star has been added.
@@ -897,9 +897,9 @@ Secondly, the program fulfills the following for all items of:
 
 * type `/$defs/full_product_name_t/product_identification_helper/skus[]`:
   
-  > The values were implicit open ended in CSAF 2.0 which resulted in ambiguity.
-  > A fix length matching was not possible.
-  > CSAF 2.1 requires to state explicitly with a `*` at the end, if a value is to be interpreted as "starts with".
+  > The values were implicitly open ended in CSAF 2.0 which resulted in ambiguity.
+  > A fixed-length matching was not possible.
+  > CSAF 2.1 requires that values ​​intended to be interpreted as "starts with" be explicitly marked with an asterisk (`*`) at the end.
 
   * If a stock keeping unit is given that does not end on a star, the CSAF 2.0 to CSAF 2.1 Converter SHOULD add a `*` to the end and output a
     warning that a partial stock keeping unit was detected and a star has been added.
