@@ -936,10 +936,11 @@ Secondly, the program fulfills the following for all items of:
   | `TLP:AMBER`               | `TLP:AMBER`               |
   | `TLP:RED`                 | `TLP:RED`                 |
 
-  If `/document/distribution/text` contains the string `TLP v2.0: TLP:<ValidTLPLabel>`, the CSAF 2.0 to CSAF 2.1 Converter SHOULD provide an
-  option to use this label instead. If the TLP label changes through such conversion in a way that is not reflected in the table above, the
-  the CSAF 2.0 to CSAF 2.1 Converter MUST output a warning that the TLP label was taken from the distribution text. Such a warning MUST include
-  both values: the converted one based on the table and the one from the distribution text.
+  If `/document/distribution/text` contains the string `TLP v2.0: TLP:` followed by a valid TLP v2.0 label as defined in the CSAF 2.1 JSON schema,
+  the CSAF 2.0 to CSAF 2.1 Converter SHOULD provide an option to use this label instead.
+  If the TLP label changes through such conversion in a way that is not reflected in the table above, the
+  the CSAF 2.0 to CSAF 2.1 Converter MUST output a warning that the TLP label was taken from the distribution text.
+  Such a warning MUST include both values: the converted one based on the table and the one from the distribution text.
 
   > This is a common case for CSAF 2.0 Documents labeled as `TLP:RED` but actually intended to be `TLP:AMBER+STRICT`.
 
