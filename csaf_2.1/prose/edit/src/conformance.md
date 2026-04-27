@@ -843,13 +843,12 @@ Secondly, the program fulfills the following for all items of:
     > A tool MAY provide a non-default option to output the invalid document.
 
 * type `/$defs/full_product_name_t/product_identification_helper/cpe`: If a CPE is invalid, the CSAF 2.0 to CSAF 2.1 Converter SHOULD removed the
-  invalid value and output a warning that an invalid CPE was detected and removed. Such a warning MUST include the invalid CPE.
+  invalid value and output a warning that an invalid CPE was detected and removed.
 * type `/$defs/full_product_name_t/product_identification_helper/hashes[]/file_hashes[]/algorithm`:
   If the algorithm is known to the implementation or mentioned in this standard, the CSAF 2.0 to CSAF 2.1 Converter MUST ensure its spelling
   is exactly as prescribed by this standard.
   If the algorithm is unknown to the implementation, the CSAF 2.0 to CSAF 2.1 Converter MUST convert it to lowercase and output a warning that
   an unknown hash algorithm was detected and converted.
-  Such a warning MUST include the invalid path as well as value of the algorithm.
 
   > A tool MAY provide a non-default option to suppress this conversion step.
 
@@ -858,11 +857,9 @@ Secondly, the program fulfills the following for all items of:
 * type `/$defs/full_product_name_t/product_identification_helper/model_numbers[]`:
   * If a model number is given that does not end on a star, the CSAF 2.0 to CSAF 2.1 Converter SHOULD add a `*` to the end and output a
     warning that a partial model number was detected and a star has been added.
-    Such a warning MUST include the model number.
   * If the model number contains a `\`, the CSAF 2.0 to CSAF 2.1 Converter MUST escape it by inserting an additional `\` before the character.
   * If the model number contains multiple unescaped `*` after the conversion, the CSAF 2.0 to CSAF 2.1 Converter MUST remove the entry and
     output a warning that a model number with multiple stars was detected and removed.
-    Such a warning MUST include the model number.
 
   > A tool MAY provide a non-default option to interpret all model numbers as complete and therefore does not add any stars.
 
@@ -875,11 +872,9 @@ Secondly, the program fulfills the following for all items of:
 * type `/$defs/full_product_name_t/product_identification_helper/serial_numbers[]`:
   * If a serial number is given that does not end on a star, the CSAF 2.0 to CSAF 2.1 Converter SHOULD add a `*` to the end and output a
     warning that a partial serial number was detected and a star has been added.
-    Such a warning MUST include the serial number.
   * If the serial number contains a `\`, the CSAF 2.0 to CSAF 2.1 Converter MUST escape it by inserting an additional `\` before the character.
   * If the serial number contains multiple unescaped `*` after the conversion, the CSAF 2.0 to CSAF 2.1 Converter MUST remove the entry and
     output a warning that a serial number with multiple stars was detected and removed.
-    Such a warning MUST include the serial number.
 
   > A tool MAY provide a non-default option to interpret all serial numbers as complete and therefore does not add any stars.
 
@@ -890,12 +885,10 @@ Secondly, the program fulfills the following for all items of:
 * type `/$defs/full_product_name_t/product_identification_helper/skus[]`:
   * If a stock keeping unit is given that does not end on a star, the CSAF 2.0 to CSAF 2.1 Converter SHOULD add a `*` to the end and output a
     warning that a partial stock keeping unit was detected and a star has been added.
-    Such a warning MUST include the stock keeping unit.
   * If the stock keeping unit contains a `\`,
     the CSAF 2.0 to CSAF 2.1 Converter MUST escape it by inserting an additional `\` before the character.
   * If the stock keeping unit contains multiple unescaped `*` after the conversion, the CSAF 2.0 to CSAF 2.1 Converter MUST remove the entry and
     output a warning that a stock keeping unit with multiple stars was detected and removed.
-    Such a warning MUST include the stock keeping unit.
 
   > A tool MAY provide a non-default option to interpret all stock keeping units as complete and therefore does not add any stars.
 
@@ -952,8 +945,8 @@ Secondly, the program fulfills the following for all items of:
 * `/document/notes`: If any `/document/notes` item contains one of the `category` and `title` combinations specified in
   [sec](#document-property---notes), where the `title` is extended, the CSAF 2.0 to CSAF 2.1 Converter SHALL try to identify whether that extension
   is a specific product name, version or family.
-  In such case, the CSAF 2.0 to CSAF 2.1 Converter SHALL try to add the corresponding products to the note item and output a warning that a potential product
-  specific note has been discovered and products have been assigned to it.
+  In such case, the CSAF 2.0 to CSAF 2.1 Converter SHALL try to add the corresponding products to the note item and output a warning that a
+  potential product specific note has been discovered and products have been assigned to it.
   Such warning MUST also include the note and the assigned products.
   If the CSAF 2.0 to CSAF 2.1 Converter is unable to create a valid object, it MUST remove the reference to the products and output a warning that a potential
   product specific note has been discovered and no products could been assigned to it.
