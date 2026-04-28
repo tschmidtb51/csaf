@@ -849,8 +849,8 @@ Secondly, the program fulfills the following for all items of:
 
     > A tool MAY provide a non-default option to output the invalid document.
 
-* type `/$defs/full_product_name_t/product_identification_helper/cpe`: If a CPE is invalid, the CSAF 2.0 to CSAF 2.1 Converter SHOULD removed the
-  invalid value and output a warning that an invalid CPE was detected and removed.
+* type `/$defs/full_product_name_t/product_identification_helper/cpe`: If a CPE is invalid,
+  the CSAF 2.0 to CSAF 2.1 Converter SHOULD remove the invalid value and output a warning that an invalid CPE was detected and removed.
 * type `/$defs/full_product_name_t/product_identification_helper/hashes[]/file_hashes[]/algorithm`:
   If the algorithm is known to the implementation or mentioned in this standard, the CSAF 2.0 to CSAF 2.1 Converter MUST ensure its spelling
   is exactly as prescribed by this standard.
