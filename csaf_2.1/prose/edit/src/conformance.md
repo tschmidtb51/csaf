@@ -163,8 +163,8 @@ Secondly, the program fulfills the following for all items of:
     Such a error MUST include the invalid path as well as the branch types that were present multiple times.
 
     > A tool MAY provide a non-default option to output the invalid document.
-* type `/$defs/full_product_name_t/product_identification_helper/cpe`: If a CPE is invalid, the CVRF CSAF Converter SHOULD removed the
-  invalid value and output a warning that an invalid CPE was detected and removed.
+* type `/$defs/full_product_name_t/product_identification_helper/cpe`: If a CPE is invalid,
+  the CVRF CSAF Converter SHOULD remove the invalid value and output a warning that an invalid CPE was detected and removed.
 * type `/$defs/version_t`: If any element doesn't match the semantic versioning,
   replace the all elements of type `/$defs/version_t` with the corresponding integer version.
   For that, CVRF CSAF Converter sorts the items of `/document/tracking/revision_history` by `number` ascending according to the rules of CVRF.
