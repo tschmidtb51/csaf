@@ -163,7 +163,8 @@ Secondly, the program fulfills the following for all items of:
     Such a error MUST include the invalid path as well as the branch types that were present multiple times.
 
     > A tool MAY provide a non-default option to output the invalid document.
-
+* type `/$defs/full_product_name_t/product_identification_helper/cpe`: If a CPE is invalid, the CVRF CSAF Converter SHOULD removed the
+  invalid value and output a warning that an invalid CPE was detected and removed.
 * type `/$defs/version_t`: If any element doesn't match the semantic versioning,
   replace the all elements of type `/$defs/version_t` with the corresponding integer version.
   For that, CVRF CSAF Converter sorts the items of `/document/tracking/revision_history` by `number` ascending according to the rules of CVRF.
@@ -379,7 +380,6 @@ Secondly, the program fulfills the following for all items of:
   * In any other case, the CVRF CSAF Converter MUST preserve the product in the remediation of the category `none_available`.
   * The CVRF CSAF Converter MUST output a warning if a remediation was added, deleted or the value of the category was changed,
     including the products it was changed for.
-* The CVRF CSAF Converter SHALL provide the JSON path where the warning occurred together with the warning.
 
 ### Conformance Clause 6: CSAF Content Management System
 
@@ -1066,7 +1066,6 @@ Secondly, the program fulfills the following for all items of:
   * In any other case, the CSAF 2.0 to CSAF 2.1 Converter MUST preserve the product in the remediation of the category `none_available`.
   * The CSAF 2.0 to CSAF 2.1 Converter MUST output a warning if a remediation was added, deleted or the value of the category was changed,
     including the products it was changed for.
-* The CSAF 2.0 to CSAF 2.1 Converter SHALL provide the JSON path where the warning occurred together with the warning.
 
 > A tool MAY implement options to convert other Markdown formats to GitHub-flavored Markdown.
 
