@@ -123,7 +123,7 @@ Firstly, the program:
 * satisfies the "CSAF Producer" conformance profile.
 * takes only CVRF documents as input.
 * outputs a warning that an additional property was detected and not converted if it detects an additional property in the input.
-  Such a warning MUST include the additional property and its path.
+  Such a warning SHALL include the additional property and its path.
   The CVRF CSAF Converter SHALL ignore that additional property during the conversion.
 * includes in every error and warning the relevant paths and values ​​from the original file that triggered the alert,
   unless otherwise specified in this standard.
@@ -131,37 +131,37 @@ Firstly, the program:
 
 Secondly, the program fulfills the following for all items of:
 
-* value type `string` with format `date-time`: If the value contains a `60` in the seconds place, the CVRF CSAF Converter MUST replace the seconds
+* value type `string` with format `date-time`: If the value contains a `60` in the seconds place, the CVRF CSAF Converter SHALL replace the seconds
   and their fractions with `59.999999`.
   In addition, the converter outputs a warning that leap seconds are now prohibited in CSAF and the value has been replaced.
   The CVRF CSAF Converter SHOULD indicate in such warning message whether the value was a valid leap second or not.
 * type `/$defs/branches_t`:
   * If any `prod:Branch` instance has the type `Legacy`, `Realm`, or `Resource`,
-    the CVRF CSAF Converter MUST replace those with the category `product_name`.
+    the CVRF CSAF Converter SHALL replace those with the category `product_name`.
     In addition, the converter outputs a warning that those types do not exist in CSAF 2.1 and have been replaced with the category `product_name`.
 
     > There is a chance, that this replacement is incorrect or another category is a better fit.
     > Users of the converter are advised to check the content of such documents to make sure the conversion is correct or at least not misleading.
 
   * If any `Branch Type` appears multiple times along a path under `/prod:ProductTree/prod:Branch` and the `Branch Type` does not map to
-    an excepted category according to test [sec](#stacked-branch-categories), the CVRF CSAF Converter MUST try to convert the data into
+    an excepted category according to test [sec](#stacked-branch-categories), the CVRF CSAF Converter SHALL try to convert the data into
     a valid product tree by applying the following steps to the path:
     1. If the stacked `Branch Type` is `Vendor`, the vendor items named `Open Source`, `NOASSERTION` `undefined` and `unknown`
-       (white space, dash, hyphen, minus, underscore and case insensitive) MUST be removed.
+       (white space, dash, hyphen, minus, underscore and case insensitive) SHALL be removed.
     2. If the stacked `Branch Type` is `Product Version` and the item directly before the first `Product Version` is a `Product Name`:
-       * the category of the original `Product Name` item MUST be changed to `product_family` and
-       * the category of the first `Product Version` item MUST be changed to `product_name` and
-       * the value of the newly created `product_family` item MUST be prepended at the value of the newly created `product_name` item.
+       * the category of the original `Product Name` item SHALL be changed to `product_family` and
+       * the category of the first `Product Version` item SHALL be changed to `product_name` and
+       * the value of the newly created `product_family` item SHALL be prepended at the value of the newly created `product_name` item.
 
     If the CVRF CSAF Converter is able to create a valid product tree,
-    it MUST output a warning that an invalid product tree with stacked branch types was detected and resolved.
-    Such a warning MUST include the invalid path as well as the branch types that were present multiple times.
+    it SHALL output a warning that an invalid product tree with stacked branch types was detected and resolved.
+    Such a warning SHALL include the invalid path as well as the branch types that were present multiple times.
 
     > A tool MAY provide a non-default option to suppress this conversion step.
 
     If the CVRF CSAF Converter is unable to create a valid product tree,
-    it MUST output an error that an invalid product tree with stacked branch types was detected and could not be resolved.
-    Such a error MUST include the invalid path as well as the branch types that were present multiple times.
+    it SHALL output an error that an invalid product tree with stacked branch types was detected and could not be resolved.
+    Such a error SHALL include the invalid path as well as the branch types that were present multiple times.
 
     > A tool MAY provide a non-default option to output the invalid document.
 * type `/$defs/full_product_name_t/product_identification_helper/cpe`: If a CPE is invalid,
@@ -171,13 +171,13 @@ Secondly, the program fulfills the following for all items of:
   For that, CVRF CSAF Converter sorts the items of `/document/tracking/revision_history` by `number` ascending according to the rules of CVRF.
   Then, it replaces the value of `number` with the index number in the array (starting with 1).
   The value of `/document/tracking/version` is replaced by value of `number` of the corresponding revision item.
-  The match MUST be calculated by the original values used in the CVRF document.
-  If this conversion was applied, for each Revision the original value of `cvrf:Number` MUST be set as `legacy_version` in the converted document.
+  The match SHALL be calculated by the original values used in the CVRF document.
+  If this conversion was applied, for each Revision the original value of `cvrf:Number` SHALL be set as `legacy_version` in the converted document.
 * `/document/acknowledgments[]/organization` and `/vulnerabilities[]/acknowledgments[]/organization`:
   If more than one `cvrf:Organization` instance is given, the CVRF CSAF Converter converts the first one into the `organization`.
   In addition, the converter outputs a warning that information might be lost during conversion of document or vulnerability acknowledgment.
 * `/document/category`:
-  * If the `cvrf:DocumentType` is Security Advisory (case-insensitive), the CVRF CSAF Converter MUST try to convert the data
+  * If the `cvrf:DocumentType` is Security Advisory (case-insensitive), the CVRF CSAF Converter SHALL try to convert the data
     into a valid CSAF Document in this profile according to CSAF 2.1.
 
     > A tool MAY offer rules to create the missing fixed products from version ranges, if applicable.
@@ -188,9 +188,9 @@ Secondly, the program fulfills the following for all items of:
     the document language of the CVRF document is unspecified,
     the following rules apply:
     * If the `cvrf:DocumentTitle` starts with the string `Superseded` or the `cvrf:DocumentType` starts with `Superseded` (case-insensitive),
-      the CVRF CSAF Converter MUST try to convert all data into a valid CSAF Document in the profile "Superseded" according to CSAF 2.1.
+      the CVRF CSAF Converter SHALL try to convert all data into a valid CSAF Document in the profile "Superseded" according to CSAF 2.1.
     * If the `cvrf:DocumentTitle` starts with the string `Withdrawn` or the `cvrf:DocumentType` starts with `Withdrawn` (case-insensitive),
-      the CVRF CSAF Converter MUST try to convert all data into a valid CSAF Document in the profile "Withdrawn" according to CSAF 2.1.
+      the CVRF CSAF Converter SHALL try to convert all data into a valid CSAF Document in the profile "Withdrawn" according to CSAF 2.1.
 
     > A tool MAY provide a non-default option to remove or transform certain or all elements the hinder the creation of a valid CSAF Document according
     > to the profile.
@@ -210,7 +210,7 @@ Secondly, the program fulfills the following for all items of:
     In addition, the converter outputs a warning that a license expression was found and set as the document license expression.
   * If multiple SPDX license expressions are found, the CVRF CSAF Converter outputs a warning that multiple SPDX license expressions were found
     and therefore no document license expression could be determined.
-    This warning MUST include the list of all SPDX license expressions and their associated paths.
+    This warning SHALL include the list of all SPDX license expressions and their associated paths.
 
   > A tool MAY implement an option to suppress this conversion.
 
@@ -218,8 +218,8 @@ Secondly, the program fulfills the following for all items of:
   where the `title` is extended, the CVRF CSAF Converter SHALL try to identify whether that extension is a specific product name, version or family.
   In such case, the CVRF CSAF Converter SHALL try to add the corresponding products to the note item and output a warning that a potential product
   specific note has been discovered and products have been assigned to it.
-  Such warning MUST also include the note and the assigned products.
-  If the CVRF CSAF Converter is unable to create a valid object, it MUST remove the reference to the products and output a warning that a potential
+  Such warning SHALL also include the note and the assigned products.
+  If the CVRF CSAF Converter is unable to create a valid object, it SHALL remove the reference to the products and output a warning that a potential
   product specific note has been discovered and no products could been assigned to it.
 * `/document/publisher/name` and `/document/publisher/namespace`:
   Sets the value as given in the configuration of the program or the corresponding argument the program was invoked with.
@@ -228,11 +228,11 @@ Secondly, the program fulfills the following for all items of:
 * `/document/tracking/id`: If the element `cvrf:ID` contains any newline sequence or leading or trailing white space,
   the CVRF CSAF Converter removes those characters.
   In addition, the converter outputs a warning that the ID was changed.
-* `/product_tree/product_path[]`: For each element `prod:Relationship`, the CVRF CSAF Converter MUST apply the following rules:
+* `/product_tree/product_path[]`: For each element `prod:Relationship`, the CVRF CSAF Converter SHALL apply the following rules:
   * The value of the attribute `ProductReference` is set as the value of `beginning_product_reference`.
   * The first `prod:FullProductName` instance is converted into the `full_product_name`.
     If more than one `prod:FullProductName` instance is given,
-    the CVRF CSAF Converter MUST output a warning that information might be lost during conversion of product paths.
+    the CVRF CSAF Converter SHALL output a warning that information might be lost during conversion of product paths.
     Such warning SHOULD contain the values of all `prod:FullProductName` instances skipped.
   * The CVRF CSAF Converter constructs the first item of `subpaths` by converting the value of `RelationType` into `category`
     and the value of the attribute `RelatesToProductReference` into `next_product_reference`.
@@ -246,8 +246,8 @@ Secondly, the program fulfills the following for all items of:
     > For examples, see appendix [sec](#collapsing-product-paths).
 
 * `/vulnerabilities[]/cwes[]`:
-  * The CVRF CSAF Converter MUST remove all preceding and trailing white space from the `name`.
-  * The CVRF CSAF Converter MUST determine the CWE specification version the given CWE was selected from by
+  * The CVRF CSAF Converter SHALL remove all preceding and trailing white space from the `name`.
+  * The CVRF CSAF Converter SHALL determine the CWE specification version the given CWE was selected from by
     using the latest version that matches the `id` and `name` exactly and was published prior to the value of
     `/document/tracking/current_release_date` of the source document.
     If no such version exist, the first matching version published after the value of `/document/tracking/current_release_date`
@@ -255,52 +255,53 @@ Secondly, the program fulfills the following for all items of:
 
     > This is done to create a deterministic conversion.
 
-    If the CWE does not match at all, the CVRF CSAF Converter MUST omit this CWE and output a warning that an invalid CWE was found and has
+    If the CWE does not match at all, the CVRF CSAF Converter SHALL omit this CWE and output a warning that an invalid CWE was found and has
     been removed.
-  * If a `vuln:CWE` instance refers to a CWE category or view, the CVRF CSAF Converter MUST omit this instance and output a
+  * If a `vuln:CWE` instance refers to a CWE category or view, the CVRF CSAF Converter SHALL omit this instance and output a
     warning that this CWE has been removed as its usage is not allowed in vulnerability mappings.
-* `/vulnerabilities[]/disclosure_date`: If a `vuln:ReleaseDate` was given, the CVRF CSAF Converter MUST convert its value into the `disclosure_date` element.
+* `/vulnerabilities[]/disclosure_date`: If a `vuln:ReleaseDate` was given,
+  the CVRF CSAF Converter SHALL convert its value into the `disclosure_date` element.
 * `/vulnerabilities[]/ids`: If a `vuln:ID` element is given, the CVRF CSAF Converter converts it into the first item of the `ids` array.
-  Then, the CVRF CSAF Converter MUST execute the following steps at the converted object:
-  * If an `system_name` was given, the CVRF CSAF Converter MUST test whether it belongs to a registered
+  Then, the CVRF CSAF Converter SHALL execute the following steps at the converted object:
+  * If an `system_name` was given, the CVRF CSAF Converter SHALL test whether it belongs to a registered
   vulnerability ID system in RVISC.
-  * If the `system_name` belongs to an RVISC entry, the CVRF CSAF Converter MUST execute
+  * If the `system_name` belongs to an RVISC entry, the CVRF CSAF Converter SHALL execute
     test [sec](#matching-text-for-registered-id-system).
     * If the test passes, no further action is needed.
-    * If the test fails, the CVRF CSAF Converter MUST try to convert the entry based on the mapping
+    * If the test fails, the CVRF CSAF Converter SHALL try to convert the entry based on the mapping
       given in [cite](#RVISC-M).
-      * If the mapping succeeds and passes test [sec](#matching-text-for-registered-id-system), the CVRF CSAF Converter MUST output
+      * If the mapping succeeds and passes test [sec](#matching-text-for-registered-id-system), the CVRF CSAF Converter SHALL output
         a warning that an ID from a registered vulnerability system was detected and converted.
       * If the mapping succeeds but does not passes test [sec](#matching-text-for-registered-id-system) or the mapping fails,
-        the CVRF CSAF Converter MUST output a warning that an ID from a registered vulnerability system was detected and
+        the CVRF CSAF Converter SHALL output a warning that an ID from a registered vulnerability system was detected and
         but could not be converted automatically.
-        Such warning MUST state the reason for failure.
+        Such warning SHALL state the reason for failure.
         This includes also if the mapping is not implemented.
 
       > A tool MAY provide a non-default option to suppress this conversion step.
 
-      The output MUST include the original values and, if applicable, the converted ones.
+      The output SHALL include the original values and, if applicable, the converted ones.
 
-  * If the `system_name` does not belong to an RVISC entry, the CVRF CSAF Converter MUST try to convert the entry based on the
+  * If the `system_name` does not belong to an RVISC entry, the CVRF CSAF Converter SHALL try to convert the entry based on the
     mapping given in [cite](#RVISC-M).
-    * If no matching mapping exists, the CVRF CSAF Converter MUST output a warning that an ID from a potentially
+    * If no matching mapping exists, the CVRF CSAF Converter SHALL output a warning that an ID from a potentially
       unregistered vulnerability system was detected and no change occurred.
-    * If the mapping succeeds and passes test [sec](#matching-text-for-registered-id-system), the CVRF CSAF Converter MUST
+    * If the mapping succeeds and passes test [sec](#matching-text-for-registered-id-system), the CVRF CSAF Converter SHALL
       output a warning that an ID from a vulnerability system with a known mapping was detected and converted.
     * If the mapping succeeds but does not passes test [sec](#matching-text-for-registered-id-system) or the mapping fails otherwise,
-      the CVRF CSAF Converter MUST output a warning that an ID from a vulnerability system with a known mapping was detected
+      the CVRF CSAF Converter SHALL output a warning that an ID from a vulnerability system with a known mapping was detected
       and but could not be converted automatically.
-      Such warning MUST state the reason for failure.
+      Such warning SHALL state the reason for failure.
       This includes also if the mapping is not implemented.
 
     > A tool MAY provide a non-default option to suppress this conversion step.
 
-    The output MUST include the original values and, if applicable, the converted ones.
+    The output SHALL include the original values and, if applicable, the converted ones.
 
 * `/vulnerabilities[]/metrics[]`:
-  * For any CVSS v4 element, the CVRF CSAF Converter MUST compute the `baseSeverity` from the `baseScore` according to
+  * For any CVSS v4 element, the CVRF CSAF Converter SHALL compute the `baseSeverity` from the `baseScore` according to
     the rules of the applicable CVSS standard. (CSAF CVRF v1.2 predates CVSS v4.0.)
-  * For any CVSS v3 element, the CVRF CSAF Converter MUST compute the `baseSeverity` from the `baseScore` according to
+  * For any CVSS v3 element, the CVRF CSAF Converter SHALL compute the `baseSeverity` from the `baseScore` according to
     the rules of the applicable CVSS standard.
   * If no `product_id` is given, the CVRF CSAF Converter appends all Product IDs which are listed under `../product_status` in
     the arrays `known_affected`, `first_affected` and `last_affected`.
@@ -342,7 +343,7 @@ Secondly, the program fulfills the following for all items of:
     3. Retrieve the CVSS version from the CVSS namespace given in the root element, if present.
        The CVRF CSAF Converter outputs a warning that this value was guessed from the global namespace.
        If more than one CVSS namespace is present and the element is not clearly defined via the namespace,
-       this step MUST be skipped without a decision.
+       this step SHALL be skipped without a decision.
 
         *Example 4:*
 
@@ -353,7 +354,7 @@ Secondly, the program fulfills the following for all items of:
     4. Retrieve the CVSS version from a config value, which defaults to `3.0`.
        (As CSAF CVRF v1.2 predates CVSS v3.1.) The CVRF CSAF Converter outputs a warning that this value was taken from the config.
 * `/vulnerabilities[]/metrics[]/content/cvss_v4`: If an external reference in the vulnerability linking to the official FIRST.org CVSS v4.0 calculator exists,
-  the CVRF CSAF Converter MUST convert the vector given in the fragment into a `cvss_v4` object linked to all affected products of the vulnerability.
+  the CVRF CSAF Converter SHALL convert the vector given in the fragment into a `cvss_v4` object linked to all affected products of the vulnerability.
 
   > A tool MAY implement an option to suppress this conversion.
 
@@ -365,28 +366,28 @@ Secondly, the program fulfills the following for all items of:
   a specific product name, version or family.
   In such case, the CVRF CSAF Converter SHALL try to add the corresponding products to the note item and output a warning that a potential product
   specific note has been discovered and products have been assigned to it.
-  Such warning MUST also include the note and the assigned products.
-  If the CVRF CSAF Converter is unable to create a valid object, it MUST remove the reference to the products and output a warning that a potential
+  Such warning SHALL also include the note and the assigned products.
+  If the CVRF CSAF Converter is unable to create a valid object, it SHALL remove the reference to the products and output a warning that a potential
   product specific note has been discovered and no products could been assigned to it.
 * `/vulnerabilities[]/remediations[]`:
   * If neither `product_ids` nor `group_ids` are given, the CVRF CSAF Converter appends all Product IDs which are listed under
     `../product_status` in the arrays `known_affected`, `first_affected` and `last_affected` into `product_ids`.
     If none of these arrays exist, the CVRF CSAF Converter outputs an error that no matching Product ID was found for this remediation element.
-  * The CVRF CSAF Converter MUST convert any remediation with the type `Vendor Fix` into the category `optional_patch` if the product in
+  * The CVRF CSAF Converter SHALL convert any remediation with the type `Vendor Fix` into the category `optional_patch` if the product in
     question is in one of the product status groups "Not Affected" or "Fixed" for this vulnerability.
-    Otherwise, the category `vendor_fix` MUST be set.
+    Otherwise, the category `vendor_fix` SHALL be set.
     If multiple products are associated with the remediation - either directly or through a product group - and the products belong to
-    different product status groups, the CVRF CSAF Converter MUST duplicate the remediation, change the category in one instance
+    different product status groups, the CVRF CSAF Converter SHALL duplicate the remediation, change the category in one instance
     to `optional_patch` and distribute the products accordingly as stated by the conversion rule.
-  * The CVRF CSAF Converter MUST convert any remediation with the type `None Available` into the category `fix_planned`
+  * The CVRF CSAF Converter SHALL convert any remediation with the type `None Available` into the category `fix_planned`
     if the product in question is also listed in a remediation of the type `Vendor Fix` with a `Date` in the future or no `Date` at all.
-    Consequently, the product MUST be removed from the remediation of the category `vendor_fix`.
-    If it was the last product in that remediation, the remediation MUST be removed.
-  * The CVRF CSAF Converter MUST remove any product from a remediation with the type `None Available`
+    Consequently, the product SHALL be removed from the remediation of the category `vendor_fix`.
+    If it was the last product in that remediation, the remediation SHALL be removed.
+  * The CVRF CSAF Converter SHALL remove any product from a remediation with the type `None Available`
     if the product in question is also listed in a remediation of the type `Vendor Fix` with a `Date` in the past or to the exact same time.
-    If it was the last product in that remediation, the remediation MUST be removed.
-  * In any other case, the CVRF CSAF Converter MUST preserve the product in the remediation of the category `none_available`.
-  * The CVRF CSAF Converter MUST output a warning if a remediation was added, deleted or the value of the category was changed,
+    If it was the last product in that remediation, the remediation SHALL be removed.
+  * In any other case, the CVRF CSAF Converter SHALL preserve the product in the remediation of the category `none_available`.
+  * The CVRF CSAF Converter SHALL output a warning if a remediation was added, deleted or the value of the category was changed,
     including the products it was changed for.
 
 ### Conformance Clause 6: CSAF Content Management System
@@ -453,7 +454,7 @@ A CSAF Content Management System satisfies the "CSAF Content Management System" 
   * _Administrator_: inherits _Manager_ permissions and can Change the configuration
 
 * may use groups to support client separation (multitenancy) and therefore restrict the roles to actions within their group.
-  In this case, there MUST be a _Group configurator_ which is able to change the values which are used to prefill fields in
+  In this case, there SHALL be a _Group configurator_ which is able to change the values which are used to prefill fields in
   new advisories for that group. He might also do the user management for the group up to a configured level.
 * prefills the following fields in new CSAF Documents with the values given below or based on the templates from configuration:
 
@@ -551,7 +552,7 @@ The resulting translated document:
 * has the value `translator` set in `/document/publisher/category`
 * includes a reference to the original advisory as first element of the array `/document/references[]`.
 * MAY contain translations for elements in arrays of `references_t` after the first element.
-  However, it MUST keep the original URLs as references at the end.
+  However, it SHALL keep the original URLs as references at the end.
 
 ### Conformance Clause 10: CSAF Consumer
 
@@ -654,7 +655,7 @@ A CSAF Basic Validator MAY provide one or more additional functions:
 * Apply additional quick fixes as implemented by the vendor.
 
 A CSAF Basic Validator MAY implement CSAF Additional Tests.
-In that case, it MUST make through its documentation available which tests are implemented.
+In that case, it SHALL make through its documentation available which tests are implemented.
 
 ### Conformance Clause 15: CSAF Extended Validator
 
@@ -728,7 +729,7 @@ Firstly, the program:
 * satisfies the "CSAF Producer" conformance profile.
 * takes only CSAF 2.0 Documents as input.
 * outputs a warning that an additional property was detected and not converted if it detects an additional property in the input.
-  Such a warning MUST include the additional property and its path.
+  Such a warning SHALL include the additional property and its path.
   The CSAF 2.0 to CSAF 2.1 Converter SHALL ignore that additional property during the conversion.
 * includes in every error and warning the relevant paths and values ​​from the original file that triggered the alert,
   unless otherwise specified in this standard.
@@ -736,130 +737,130 @@ Firstly, the program:
 
 Secondly, the program fulfills the following for all items of:
 
-* value type `string` with format `date-time`: If the value contains a `60` in the seconds place, the CSAF 2.0 to CSAF 2.1 Converter MUST replace
-  the seconds and their fractions with `59.999999`.
+* value type `string` with format `date-time`: If the value contains a `60` in the seconds place, the CSAF 2.0 to CSAF 2.1 Converter
+  SHALL replace the seconds and their fractions with `59.999999`.
   In addition, the converter outputs a warning that leap seconds are now prohibited in CSAF and the value has been replaced.
   The CSAF 2.0 to CSAF 2.1 Converter SHOULD indicate in such warning message whether the value was a valid leap second or not.
 * type `/$defs/branches_t`:
   * If a branch item uses the category `legacy`,
-    the CSAF 2.0 to CSAF 2.1 Converter MUST replace it with the category `product_name`.
+    the CSAF 2.0 to CSAF 2.1 Converter SHALL replace it with the category `product_name`.
     In addition, the converter outputs a warning that this type does not exist in CSAF 2.1 and have been replaced with the category `product_name`.
 
     > There is a chance, that this replacement is incorrect or another category is a better fit.
     > Users of the converter are advised to check the content of such documents to make sure the conversion is correct or at least not misleading.
   
   * If any branch category appears multiple times along a path under `/product_tree/branches` and the category is not an excepted one according to
-    test [sec](#stacked-branch-categories), the CSAF 2.0 to CSAF 2.1 Converter MUST try to convert the data into a valid product tree by
+    test [sec](#stacked-branch-categories), the CSAF 2.0 to CSAF 2.1 Converter SHALL try to convert the data into a valid product tree by
     applying the following steps to the path:
     1. If the stacked branch category is `vendor`, the vendor items named `Open Source`, `NOASSERTION`, `undefined` and `unknown`
-       (white space, dash, hyphen, minus, underscore and case insensitive) MUST be removed.
+       (white space, dash, hyphen, minus, underscore and case insensitive) SHALL be removed.
     2. If the stacked branch category is `product_version` and the item directly before the first `product_version` is a `product_name`:
-       * the category of the original `product_name` item MUST be changed to `product_family` and
-       * the category of the first `product_version` item MUST be changed to `product_name` and
-       * the value of the newly created `product_family` item MUST be prepended at the value of the newly created `product_name` item.
+       * the category of the original `product_name` item SHALL be changed to `product_family` and
+       * the category of the first `product_version` item SHALL be changed to `product_name` and
+       * the value of the newly created `product_family` item SHALL be prepended at the value of the newly created `product_name` item.
 
     If the CSAF 2.0 to CSAF 2.1 Converter is able to create a valid product tree,
-    it MUST output a warning that an invalid product tree with stacked branch categories was detected and resolved.
-    Such a warning MUST include the invalid path as well as the branch categories that were present multiple times.
+    it SHALL output a warning that an invalid product tree with stacked branch categories was detected and resolved.
+    Such a warning SHALL include the invalid path as well as the branch categories that were present multiple times.
 
     > A tool MAY provide a non-default option to suppress this conversion step.
 
     If the CSAF 2.0 to CSAF 2.1 Converter is unable to create a valid product tree,
-    it MUST output an error that an invalid product tree with stacked branch categories was detected and could not be resolved.
-    Such a error MUST include the invalid path as well as the branch categories that were present multiple times.
+    it SHALL output an error that an invalid product tree with stacked branch categories was detected and could not be resolved.
+    Such a error SHALL include the invalid path as well as the branch categories that were present multiple times.
 
     > A tool MAY provide a non-default option to output the invalid document.
 
   * If the branch categories `product_version` and `product_version_range` appear along a path under `/product_tree/branches`,
-    the CSAF 2.0 to CSAF 2.1 Converter MUST try to convert the data into a valid product tree by
+    the CSAF 2.0 to CSAF 2.1 Converter SHALL try to convert the data into a valid product tree by
     applying the following steps to the path:
 
     1. If the branch category `product_version` occurs before the `product_version_range` and the item directly before the first
        `product_version` is a `product_name`:
-       * the category of the original `product_name` item MUST be changed to `product_family` and
-       * the category of the first `product_version` item MUST be changed to `product_name` and
-       * the value of the newly created `product_family` item MUST be prepended at the value of the newly created `product_name` item.
+       * the category of the original `product_name` item SHALL be changed to `product_family` and
+       * the category of the first `product_version` item SHALL be changed to `product_name` and
+       * the value of the newly created `product_family` item SHALL be prepended at the value of the newly created `product_name` item.
     2. If the branch category `product_version` occurs before the `product_version_range` and the item directly before the first
        `product_version` is a `product_family`:
-       * the category of the first `product_version` item MUST be changed to `product_name` and
-       * the value of the direct ancestor `product_family` item MUST be prepended at the value of the newly created `product_name` item.
+       * the category of the first `product_version` item SHALL be changed to `product_name` and
+       * the value of the direct ancestor `product_family` item SHALL be prepended at the value of the newly created `product_name` item.
 
     If the CSAF 2.0 to CSAF 2.1 Converter is able to create a valid product tree,
-    it MUST output a warning that an invalid product tree with branch categories `product_version` and `product_version_range` in
+    it SHALL output a warning that an invalid product tree with branch categories `product_version` and `product_version_range` in
     one path was detected and resolved.
-    Such a warning MUST include the invalid path as well as the branch category items changed.
+    Such a warning SHALL include the invalid path as well as the branch category items changed.
 
     > A tool MAY provide a non-default option to suppress this conversion step.
 
     If the CSAF 2.0 to CSAF 2.1 Converter is unable to create a valid product tree,
-    it MUST output an error that an invalid product tree with branch categories `product_version` and `product_version_range` in
+    it SHALL output an error that an invalid product tree with branch categories `product_version` and `product_version_range` in
     one path was detected and could not be resolved.
-    Such a error MUST include the invalid path as well as the branch category items.
+    Such a error SHALL include the invalid path as well as the branch category items.
 
     > A tool MAY provide a non-default option to output the invalid document.
 
   * If the value of `name` of an item categorized as `product_version_range` and contains an upper open ended product version range,
-    the CSAF 2.0 to CSAF 2.1 Converter MUST try to convert the data into a valid product tree by
+    the CSAF 2.0 to CSAF 2.1 Converter SHALL try to convert the data into a valid product tree by
     applying the following steps to the path:
 
     1. If value of `name` consists only of one version constraint:
-       * the category of the original `product_version_range` item MUST be changed to `product_version` and
-       * the version MUST be extracted from the original value and set as new value of `name`.
+       * the category of the original `product_version_range` item SHALL be changed to `product_version` and
+       * the version SHALL be extracted from the original value and set as new value of `name`.
     2. If value of `name` consists of more than one version constraint and the upper open range is the last version constraint:
-       * the category of the original `product_version_range` item MUST be kept and
-       * the value `name` MUST be converted into the product version range ending with the version the upper open ended product version
+       * the category of the original `product_version_range` item SHALL be kept and
+       * the value `name` SHALL be converted into the product version range ending with the version the upper open ended product version
          if that does not change the inclusion boundaries.
 
     If the CSAF 2.0 to CSAF 2.1 Converter is able to create a valid product tree,
-    it MUST output a warning that an invalid product tree with an upper open ended product version range in
+    it SHALL output a warning that an invalid product tree with an upper open ended product version range in
     one path was detected and resolved.
-    Such a warning MUST include the invalid path as well as the original and new value.
+    Such a warning SHALL include the invalid path as well as the original and new value.
 
     > A tool MAY provide a non-default option to suppress this conversion step.
 
     If the CSAF 2.0 to CSAF 2.1 Converter is unable to create a valid product tree,
-    it MUST output an error that an invalid product tree with an upper open ended product version range in
+    it SHALL output an error that an invalid product tree with an upper open ended product version range in
     one path was detected and could not be resolved.
-    Such a error MUST include the invalid path as well as the original and new value.
+    Such a error SHALL include the invalid path as well as the original and new value.
 
     > A tool MAY provide a non-default option to output the invalid document.
 
   * If the value of `name` of an item categorized as `product_version_range` contains just a single version,
-    the CSAF 2.0 to CSAF 2.1 Converter MUST try to convert the data into a valid product tree by
+    the CSAF 2.0 to CSAF 2.1 Converter SHALL try to convert the data into a valid product tree by
     applying the following steps to the path:
 
     1. If value of `name` is in the vers format:
-       * the category of the original `product_version_range` item MUST be changed to `product_version` and
-       * the version MUST be extracted from the version constraint and set as new value of `name`.
+       * the category of the original `product_version_range` item SHALL be changed to `product_version` and
+       * the version SHALL be extracted from the version constraint and set as new value of `name`.
     2. If value of `name` is in the vls format:
-       * the category of the original `product_version_range` item MUST be changed to `product_version` and
-       * the value `name` MUST be kept unchanged.
+       * the category of the original `product_version_range` item SHALL be changed to `product_version` and
+       * the value `name` SHALL be kept unchanged.
 
     If the CSAF 2.0 to CSAF 2.1 Converter is able to create a valid product tree,
-    it MUST output a warning that an invalid product tree with a `product_version` declared as `product_version_range` in
+    it SHALL output a warning that an invalid product tree with a `product_version` declared as `product_version_range` in
     one path was detected and resolved.
-    Such a warning MUST include the invalid path as well as value of the product version.
+    Such a warning SHALL include the invalid path as well as value of the product version.
 
     > A tool MAY provide a non-default option to suppress this conversion step.
 
     If the CSAF 2.0 to CSAF 2.1 Converter is unable to create a valid product tree,
-    it MUST output an error that an invalid product tree with a `product_version` declared as `product_version_range` in
+    it SHALL output an error that an invalid product tree with a `product_version` declared as `product_version_range` in
     one path was detected and could not be resolved.
-    Such a error MUST include the invalid path as well as value of the product version.
+    Such a error SHALL include the invalid path as well as value of the product version.
 
     > A tool MAY provide a non-default option to output the invalid document.
 
 * type `/$defs/full_product_name_t/product_identification_helper/cpe`: If a CPE is invalid,
   the CSAF 2.0 to CSAF 2.1 Converter SHOULD remove the invalid value and output a warning that an invalid CPE was detected and removed.
 * type `/$defs/full_product_name_t/product_identification_helper/hashes[]/file_hashes[]/algorithm`:
-  If the algorithm is known to the implementation or mentioned in this standard, the CSAF 2.0 to CSAF 2.1 Converter MUST ensure its spelling
+  If the algorithm is known to the implementation or mentioned in this standard, the CSAF 2.0 to CSAF 2.1 Converter SHALL ensure its spelling
   is exactly as prescribed by this standard.
-  If the algorithm is unknown to the implementation, the CSAF 2.0 to CSAF 2.1 Converter MUST convert it to lowercase and output a warning that
+  If the algorithm is unknown to the implementation, the CSAF 2.0 to CSAF 2.1 Converter SHALL convert it to lowercase and output a warning that
   an unknown hash algorithm was detected and converted.
 
   > A tool MAY provide a non-default option to suppress this conversion step.
 
-* type `/$defs/full_product_name_t/product_identification_helper/hashes[]/file_hashes[]/value`: The CSAF 2.0 to CSAF 2.1 Converter MUST convert
+* type `/$defs/full_product_name_t/product_identification_helper/hashes[]/file_hashes[]/value`: The CSAF 2.0 to CSAF 2.1 Converter SHALL convert
   the value into a lowercase string.
 * type `/$defs/full_product_name_t/product_identification_helper/model_numbers[]`:
 
@@ -869,8 +870,8 @@ Secondly, the program fulfills the following for all items of:
 
   * If a model number is given that does not end on a star, the CSAF 2.0 to CSAF 2.1 Converter SHOULD add a `*` to the end and output a
     warning that a partial model number was detected and a star has been added.
-  * If the model number contains a `\`, the CSAF 2.0 to CSAF 2.1 Converter MUST escape it by inserting an additional `\` before the character.
-  * If the model number contains multiple unescaped `*` after the conversion, the CSAF 2.0 to CSAF 2.1 Converter MUST remove the entry and
+  * If the model number contains a `\`, the CSAF 2.0 to CSAF 2.1 Converter SHALL escape it by inserting an additional `\` before the character.
+  * If the model number contains multiple unescaped `*` after the conversion, the CSAF 2.0 to CSAF 2.1 Converter SHALL remove the entry and
     output a warning that a model number with multiple stars was detected and removed.
 
   > A tool MAY provide a non-default option to interpret all model numbers as complete and therefore does not add any stars.
@@ -880,7 +881,7 @@ Secondly, the program fulfills the following for all items of:
   > A tool MAY provide a non-default option to interpret the `*` in all model numbers as part of the model number itself and therefore escape it.
 
 * type `/$defs/full_product_name_t/product_identification_helper/purls`: If a `/$defs/full_product_name_t/product_identification_helper/purl` is given,
-  the CSAF 2.0 to CSAF 2.1 Converter MUST convert it into the first item of the corresponding `purls` array.
+  the CSAF 2.0 to CSAF 2.1 Converter SHALL convert it into the first item of the corresponding `purls` array.
 * type `/$defs/full_product_name_t/product_identification_helper/serial_numbers[]`:
 
   > The values were implicitly open ended in CSAF 2.0 which resulted in ambiguity.
@@ -889,8 +890,8 @@ Secondly, the program fulfills the following for all items of:
 
   * If a serial number is given that does not end on a star, the CSAF 2.0 to CSAF 2.1 Converter SHOULD add a `*` to the end and output a
     warning that a partial serial number was detected and a star has been added.
-  * If the serial number contains a `\`, the CSAF 2.0 to CSAF 2.1 Converter MUST escape it by inserting an additional `\` before the character.
-  * If the serial number contains multiple unescaped `*` after the conversion, the CSAF 2.0 to CSAF 2.1 Converter MUST remove the entry and
+  * If the serial number contains a `\`, the CSAF 2.0 to CSAF 2.1 Converter SHALL escape it by inserting an additional `\` before the character.
+  * If the serial number contains multiple unescaped `*` after the conversion, the CSAF 2.0 to CSAF 2.1 Converter SHALL remove the entry and
     output a warning that a serial number with multiple stars was detected and removed.
 
   > A tool MAY provide a non-default option to interpret all serial numbers as complete and therefore does not add any stars.
@@ -908,8 +909,8 @@ Secondly, the program fulfills the following for all items of:
   * If a stock keeping unit is given that does not end on a star, the CSAF 2.0 to CSAF 2.1 Converter SHOULD add a `*` to the end and output a
     warning that a partial stock keeping unit was detected and a star has been added.
   * If the stock keeping unit contains a `\`,
-    the CSAF 2.0 to CSAF 2.1 Converter MUST escape it by inserting an additional `\` before the character.
-  * If the stock keeping unit contains multiple unescaped `*` after the conversion, the CSAF 2.0 to CSAF 2.1 Converter MUST remove the entry and
+    the CSAF 2.0 to CSAF 2.1 Converter SHALL escape it by inserting an additional `\` before the character.
+  * If the stock keeping unit contains multiple unescaped `*` after the conversion, the CSAF 2.0 to CSAF 2.1 Converter SHALL remove the entry and
     output a warning that a stock keeping unit with multiple stars was detected and removed.
 
   > A tool MAY provide a non-default option to interpret all stock keeping units as complete and therefore does not add any stars.
@@ -920,21 +921,21 @@ Secondly, the program fulfills the following for all items of:
   > A tool MAY provide a non-default option to interpret the `*` in all stock keeping units as part of the stock keeping unit
   > itself and therefore escape it.
 
-* `/$schema`: The CSAF 2.0 to CSAF 2.1 Converter MUST set property with the value prescribed by the schema.
+* `/$schema`: The CSAF 2.0 to CSAF 2.1 Converter SHALL set property with the value prescribed by the schema.
 * `/document/category`:
-  * If the `category` equals `csaf_security_advisory`, the CSAF 2.0 to CSAF 2.1 Converter MUST try to convert the data into a
+  * If the `category` equals `csaf_security_advisory`, the CSAF 2.0 to CSAF 2.1 Converter SHALL try to convert the data into a
     valid CSAF Document in this profile according to CSAF 2.1.
     For any version range of affected products that uses the strict `<`, i.e. not `<=`, as comparator of the last version constraint, the CSAF 2.0
     to CSAF 2.1 Converter SHOULD add a new product with the version of the last constraint and add that in the appropriate places as `fixed`.
-    The CSAF 2.0 to CSAF 2.1 Converter MUST output a warning that a product was added to the `product_tree` and the corresponding `/vulnerabilities[]`.
-    Such warning MUST contain the full product name and its path as well as the paths of the `/vulnerabilities[]` it was added to.
+    The CSAF 2.0 to CSAF 2.1 Converter SHALL output a warning that a product was added to the `product_tree` and the corresponding `/vulnerabilities[]`.
+    Such warning SHALL contain the full product name and its path as well as the paths of the `/vulnerabilities[]` it was added to.
     If the CSAF 2.0 to CSAF 2.1 Converter is unable to create a valid CSAF 2.1 Document according to the profile, it SHALL set the `category` value to
     `csaf_deprecated_security_advisory`.
   * If the `/document/lang` is English or unspecified, the following rules apply:
     * If the `/document/title` starts with the string `Superseded` or the `/document/category` has the value `Superseded` (case-insensitive),
-      the CSAF 2.0 to CSAF 2.1 Converter MUST try to convert all data into a valid CSAF Document in the profile "Superseded" according to CSAF 2.1.
+      the CSAF 2.0 to CSAF 2.1 Converter SHALL try to convert all data into a valid CSAF Document in the profile "Superseded" according to CSAF 2.1.
     * If the `/document/title` starts with the string `Withdrawn` or the `/document/category` has the value `Withdrawn` (case-insensitive),
-      the CSAF 2.0 to CSAF 2.1 Converter MUST try to convert all data into a valid CSAF Document in the profile "Withdrawn" according to CSAF 2.1.
+      the CSAF 2.0 to CSAF 2.1 Converter SHALL try to convert all data into a valid CSAF Document in the profile "Withdrawn" according to CSAF 2.1.
  
     > A tool MAY provide a non-default option to remove or transform certain or all elements the hinder the creation of a valid CSAF Document according
     > to the profile.
@@ -943,8 +944,8 @@ Secondly, the program fulfills the following for all items of:
 
     If the CSAF 2.0 to CSAF 2.1 Converter is unable to create a valid CSAF 2.1 Document according to the profile, it SHALL set the `category`
     of the original CSAF Document and output a warning a potentially withdrawn CSAF Document was created which would result in an invalid CSAF.
-* `/document/csaf_version`: The CSAF 2.0 to CSAF 2.1 Converter MUST update the value to `2.1`.
-* `/document/distribution/tlp/label`: If a TLP label is given, the CSAF 2.0 to CSAF 2.1 Converter MUST convert it according to the table below:
+* `/document/csaf_version`: The CSAF 2.0 to CSAF 2.1 Converter SHALL update the value to `2.1`.
+* `/document/distribution/tlp/label`: If a TLP label is given, the CSAF 2.0 to CSAF 2.1 Converter SHALL convert it according to the table below:
   
   | CSAF 2.0 (using TLP v1.0) | CSAF 2.1 (using TLP v2.0) |
   |---------------------------|---------------------------|
@@ -957,8 +958,8 @@ Secondly, the program fulfills the following for all items of:
   the CSAF 2.0 to CSAF 2.1 Converter SHOULD provide an option to use this label instead.
 
   If the TLP label changes during such a conversion in a way not listed in the table above,
-  the CSAF 2.0 to CSAF 2.1 Converter MUST output a warning that the TLP label was taken from the distribution text.
-  This warning MUST include both values: the value converted using the table and the value from the distribution text.
+  the CSAF 2.0 to CSAF 2.1 Converter SHALL output a warning that the TLP label was taken from the distribution text.
+  This warning SHALL include both values: the value converted using the table and the value from the distribution text.
 
   > This is a common case for CSAF 2.0 Documents labeled as `TLP:RED` but actually intended to be `TLP:AMBER+STRICT`.
 
@@ -969,7 +970,7 @@ Secondly, the program fulfills the following for all items of:
     In addition, the converter outputs a warning that license expression was found and set as document license expression.
   * If multiple SPDX license expressions are found, the CSAF 2.0 to CSAF 2.1 Converter outputs a warning that multiple
     SPDX license expressions were found and therefore no document license expression could be determined.
-    Such a warning MUST include the list of all SPDX license expressions and their associated paths.
+    Such a warning SHALL include the list of all SPDX license expressions and their associated paths.
 
   > A tool MAY implement an option to suppress this conversion.
 
@@ -978,16 +979,16 @@ Secondly, the program fulfills the following for all items of:
   is a specific product name, version or family.
   In such case, the CSAF 2.0 to CSAF 2.1 Converter SHALL try to add the corresponding products to the note item and output a warning that a
   potential product specific note has been discovered and products have been assigned to it.
-  Such warning MUST also include the note and the assigned products.
-  If the CSAF 2.0 to CSAF 2.1 Converter is unable to create a valid object, it MUST remove the reference to the products and output a warning that a potential
+  Such warning SHALL also include the note and the assigned products.
+  If the CSAF 2.0 to CSAF 2.1 Converter is unable to create a valid object, it SHALL remove the reference to the products and output a warning that a potential
   product specific note has been discovered and no products could been assigned to it.
 * `/document/publisher/category`: If the value is `other`, the CSAF 2.0 to CSAF 2.1 Converter SHOULD output a warning that some parties have
-  been regrouped into the new value `multiplier`. An option to suppress this warning MUST exist. In addition, an option SHOULD be provided to
+  been regrouped into the new value `multiplier`. An option to suppress this warning SHALL exist. In addition, an option SHOULD be provided to
   set the value to `multiplier`.
-* `/document/title`: If the value contains the `/document/tracking/id`, the CSAF 2.0 to CSAF 2.1 Converter MUST remove the `/document/tracking/id`
-  from the `/document/title`. In addition, separating characters including but not limited to white space, colon, dash and brackets MUST be removed.
+* `/document/title`: If the value contains the `/document/tracking/id`, the CSAF 2.0 to CSAF 2.1 Converter SHALL remove the `/document/tracking/id`
+  from the `/document/title`. In addition, separating characters including but not limited to white space, colon, dash and brackets SHALL be removed.
 * `/product_tree/product_path[]`: For each element in `/product_tree/relationships[]`, the CSAF 2.0 to CSAF 2.1 Converter
-  MUST apply the following rules:
+  SHALL apply the following rules:
   * The value of `product_reference` is set as the value of `beginning_product_reference`.
   * The CSAF 2.0 to CSAF 2.1 Converter constructs the first item of `subpaths` by setting the value of `category` into `category`
     and the value of `relates_to_product_reference` into `next_product_reference`.
@@ -1001,8 +1002,8 @@ Secondly, the program fulfills the following for all items of:
     > For examples, see appendix [sec](#collapsing-product-paths).
 
 * `/vulnerabilities[]/cwes[]`:
-  * The CSAF 2.0 to CSAF 2.1 Converter MUST remove all preceding and trailing white space from the `name`.
-  * The CSAF 2.0 to CSAF 2.1 Converter MUST determine the CWE specification version the given CWE was selected from by
+  * The CSAF 2.0 to CSAF 2.1 Converter SHALL remove all preceding and trailing white space from the `name`.
+  * The CSAF 2.0 to CSAF 2.1 Converter SHALL determine the CWE specification version the given CWE was selected from by
     using the latest version that matches the `id` and `name` exactly and was published prior to the value of
     `/document/tracking/current_release_date` of the source document.
     If no such version exist, the first matching version published after the value of `/document/tracking/current_release_date`
@@ -1012,45 +1013,45 @@ Secondly, the program fulfills the following for all items of:
 
     The tool SHOULD implement an option to use the latest available CWE version at the time of the conversion that still matches.
 
-* `/vulnerabilities[]/disclosure_date`: If a `release_date` was given, the CSAF 2.0 to CSAF 2.1 Converter MUST convert its value as value
+* `/vulnerabilities[]/disclosure_date`: If a `release_date` was given, the CSAF 2.0 to CSAF 2.1 Converter SHALL convert its value as value
   into the `disclosure_date` element.
-* `/vulnerabilities[]/ids`:  If an `system_name` was given, the CSAF 2.0 to CSAF 2.1 Converter MUST test whether it belongs to a registered
+* `/vulnerabilities[]/ids`:  If an `system_name` was given, the CSAF 2.0 to CSAF 2.1 Converter SHALL test whether it belongs to a registered
   vulnerability ID system in RVISC.
-  * If the `system_name` belongs to an RVISC entry, the CSAF 2.0 to CSAF 2.1 Converter MUST execute
+  * If the `system_name` belongs to an RVISC entry, the CSAF 2.0 to CSAF 2.1 Converter SHALL execute
     test [sec](#matching-text-for-registered-id-system).
     * If the test passes, no further action is needed.
-    * If the test fails, the CSAF 2.0 to CSAF 2.1 Converter MUST try to convert the entry based on the mapping
+    * If the test fails, the CSAF 2.0 to CSAF 2.1 Converter SHALL try to convert the entry based on the mapping
       given in [cite](#RVISC-M).
-      * If the mapping succeeds and passes test [sec](#matching-text-for-registered-id-system), the CSAF 2.0 to CSAF 2.1 Converter MUST output
+      * If the mapping succeeds and passes test [sec](#matching-text-for-registered-id-system), the CSAF 2.0 to CSAF 2.1 Converter SHALL output
         a warning that an ID from a registered vulnerability system was detected and converted.
       * If the mapping succeeds but does not passes test [sec](#matching-text-for-registered-id-system) or the mapping fails,
-        the CSAF 2.0 to CSAF 2.1 Converter MUST output a warning that an ID from a registered vulnerability system was detected and
+        the CSAF 2.0 to CSAF 2.1 Converter SHALL output a warning that an ID from a registered vulnerability system was detected and
         but could not be converted automatically.
-        Such warning MUST state the reason for failure.
+        Such warning SHALL state the reason for failure.
         This includes also if the mapping is not implemented.
 
       > A tool MAY provide a non-default option to suppress this conversion step.
 
-      The output MUST include the original values and, if applicable, the converted ones.
+      The output SHALL include the original values and, if applicable, the converted ones.
 
-  * If the `system_name` does not belong to an RVISC entry, the CSAF 2.0 to CSAF 2.1 Converter MUST try to convert the entry based on the
+  * If the `system_name` does not belong to an RVISC entry, the CSAF 2.0 to CSAF 2.1 Converter SHALL try to convert the entry based on the
     mapping given in [cite](#RVISC-M).
-    * If no matching mapping exists, the CSAF 2.0 to CSAF 2.1 Converter MUST output a warning that an ID from a potentially
+    * If no matching mapping exists, the CSAF 2.0 to CSAF 2.1 Converter SHALL output a warning that an ID from a potentially
       unregistered vulnerability system was detected and no change occurred.
-    * If the mapping succeeds and passes test [sec](#matching-text-for-registered-id-system), the CSAF 2.0 to CSAF 2.1 Converter MUST
+    * If the mapping succeeds and passes test [sec](#matching-text-for-registered-id-system), the CSAF 2.0 to CSAF 2.1 Converter SHALL
       output a warning that an ID from a vulnerability system with a known mapping was detected and converted.
     * If the mapping succeeds but does not passes test [sec](#matching-text-for-registered-id-system) or the mapping fails otherwise,
-      the CSAF 2.0 to CSAF 2.1 Converter MUST output a warning that an ID from a vulnerability system with a known mapping was detected
+      the CSAF 2.0 to CSAF 2.1 Converter SHALL output a warning that an ID from a vulnerability system with a known mapping was detected
       and but could not be converted automatically.
-      Such warning MUST state the reason for failure.
+      Such warning SHALL state the reason for failure.
       This includes also if the mapping is not implemented.
 
     > A tool MAY provide a non-default option to suppress this conversion step.
 
-    The output MUST include the original values and, if applicable, the converted ones.
+    The output SHALL include the original values and, if applicable, the converted ones.
 
 * `/vulnerabilities[]/metrics[]/content/cvss_v4`: If an external reference in the vulnerability linking to the official FIRST.org CVSS v4.0
-  calculator exists, the CSAF 2.0 to CSAF 2.1 Converter MUST convert the vector given in the fragment into a `cvss_v4` object linked to all
+  calculator exists, the CSAF 2.0 to CSAF 2.1 Converter SHALL convert the vector given in the fragment into a `cvss_v4` object linked to all
   affected products of the vulnerability.
   
   > A tool MAY implement an option to suppress this conversion.
@@ -1059,7 +1060,7 @@ Secondly, the program fulfills the following for all items of:
   remove the invalid `cvss_v4` object and output a warning that the automatic conversion of the CVSS v4.0 reference failed.
   Such warning SHOULD include the specific error that occurred.
 * `/vulnerabilities[]/metrics[]/content/ssvc_v2`: If a SSVC vector or decision points of an SSVC vector are given in an item of `notes` of the current
-  vulnerability using the `title` `SSVC` and the `category` `other`, the CSAF 2.0 to CSAF 2.1 Converter MUST convert that data into the `ssvc_v2`
+  vulnerability using the `title` `SSVC` and the `category` `other`, the CSAF 2.0 to CSAF 2.1 Converter SHALL convert that data into the `ssvc_v2`
   object within the current vulnerability.
   If the CSAF 2.0 to CSAF 2.1 Converter is able to construct a valid object without losing any information, the corresponding `notes` item SHALL
   be removed.
@@ -1072,25 +1073,25 @@ Secondly, the program fulfills the following for all items of:
   extension is a specific product name, version or family.
   In such case, the CSAF 2.0 to CSAF 2.1 Converter SHALL try to add the corresponding products to the note item and output a warning that a potential
   product specific note has been discovered and products have been assigned to it.
-  Such warning MUST also include the note and the assigned products.
-  If the CSAF 2.0 to CSAF 2.1 Converter is unable to create a valid object, it MUST remove the reference to the products and output a warning that a
+  Such warning SHALL also include the note and the assigned products.
+  If the CSAF 2.0 to CSAF 2.1 Converter is unable to create a valid object, it SHALL remove the reference to the products and output a warning that a
   potential product specific note has been discovered and no products could been assigned to it.
 * `/vulnerabilities[]/remediations[]`:
-  * The CSAF 2.0 to CSAF 2.1 Converter MUST convert any remediation with the category `vendor_fix` into the category `optional_patch`
+  * The CSAF 2.0 to CSAF 2.1 Converter SHALL convert any remediation with the category `vendor_fix` into the category `optional_patch`
     if the product in question is in one of the product status groups "Not Affected" or "Fixed" for this vulnerability.
-    Otherwise, the category `vendor_fix` MUST stay the same.
+    Otherwise, the category `vendor_fix` SHALL stay the same.
     If multiple products are associated with the remediation - either directly or through a product group - and the products belong to different
-    product status groups, the CSAF 2.0 to CSAF 2.1 Converter MUST duplicate the remediation, change the category in one instance to `optional_patch`
+    product status groups, the CSAF 2.0 to CSAF 2.1 Converter SHALL duplicate the remediation, change the category in one instance to `optional_patch`
     and distribute the products accordingly as stated by the conversion rule.
-  * The CSAF 2.0 to CSAF 2.1 Converter MUST convert any remediation with the category `none_available` into the category `fix_planned`
+  * The CSAF 2.0 to CSAF 2.1 Converter SHALL convert any remediation with the category `none_available` into the category `fix_planned`
     if the product in question is also listed in a remediation of the category `vendor_fix` with a `date` in the future or no `date` at all.
-    Consequently, the product MUST be removed from the remediation of the category `vendor_fix`.
-    If it was the last product in that remediation, the remediation MUST be removed.
-  * The CSAF 2.0 to CSAF 2.1 Converter MUST remove any product from a remediation with the category `none_available`
+    Consequently, the product SHALL be removed from the remediation of the category `vendor_fix`.
+    If it was the last product in that remediation, the remediation SHALL be removed.
+  * The CSAF 2.0 to CSAF 2.1 Converter SHALL remove any product from a remediation with the category `none_available`
     if the product in question is also listed in a remediation of the category `vendor_fix` with a `date` in the past or to the exact same time.
-    If it was the last product in that remediation, the remediation MUST be removed.
-  * In any other case, the CSAF 2.0 to CSAF 2.1 Converter MUST preserve the product in the remediation of the category `none_available`.
-  * The CSAF 2.0 to CSAF 2.1 Converter MUST output a warning if a remediation was added, deleted or the value of the category was changed,
+    If it was the last product in that remediation, the remediation SHALL be removed.
+  * In any other case, the CSAF 2.0 to CSAF 2.1 Converter SHALL preserve the product in the remediation of the category `none_available`.
+  * The CSAF 2.0 to CSAF 2.1 Converter SHALL output a warning if a remediation was added, deleted or the value of the category was changed,
     including the products it was changed for.
 
 > A tool MAY implement options to convert other Markdown formats to GitHub-flavored Markdown.
@@ -1229,7 +1230,7 @@ The program:
   whose `system_name` is contained in [cite](#RVISC-R) but the `text` does not conform the entry.
 * satisfies the normative requirements given below.
 
-The program MUST provide the following options:
+The program SHALL provide the following options:
 
 * an option to insert an automatically generated revision history entry detailing the changes applied and
   make necessary updates to elements in `/document/tracking` (commit mode).
