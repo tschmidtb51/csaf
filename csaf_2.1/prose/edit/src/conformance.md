@@ -160,7 +160,7 @@ Secondly, the program fulfills the following for all items of:
     > A tool MAY provide a non-default option to suppress this conversion step.
 
     If the CVRF CSAF Converter is unable to create a valid product tree,
-    it SHALL output an error that an invalid product tree with stacked branch types was detected and could not be resolved.
+    it SHALL issue an error that an invalid product tree with stacked branch types was detected and could not be resolved.
     Such a error SHALL include the invalid path as well as the branch types that were present multiple times.
 
     > A tool MAY provide a non-default option to output the invalid document.
@@ -305,8 +305,8 @@ Secondly, the program fulfills the following for all items of:
     the rules of the applicable CVSS standard.
   * If no `product_id` is given, the CVRF CSAF Converter appends all Product IDs which are listed under `../product_status` in
     the arrays `known_affected`, `first_affected` and `last_affected`.
-    If none of these arrays exist, the CVRF CSAF Converter outputs an error that no matching Product ID was found for this score element.
-  * If a `vectorString` is missing, the CVRF CSAF Converter outputs an error that the CVSS element could not be converted as
+    If none of these arrays exist, the CVRF CSAF Converter issues an error that no matching Product ID was found for this score element.
+  * If a `vectorString` is missing, the CVRF CSAF Converter issues an error that the CVSS element could not be converted as
     the CVSS vector was missing.
     A CVRF CSAF Converter MAY offer a configuration option to delete such elements.
   * If there are CVSS v3.0 and CVSS v3.1 Vectors available for the same product, the CVRF CSAF Converter discards
@@ -372,7 +372,7 @@ Secondly, the program fulfills the following for all items of:
 * `/vulnerabilities[]/remediations[]`:
   * If neither `product_ids` nor `group_ids` are given, the CVRF CSAF Converter appends all Product IDs which are listed under
     `../product_status` in the arrays `known_affected`, `first_affected` and `last_affected` into `product_ids`.
-    If none of these arrays exist, the CVRF CSAF Converter outputs an error that no matching Product ID was found for this remediation element.
+    If none of these arrays exist, the CVRF CSAF Converter issues an error that no matching Product ID was found for this remediation element.
   * The CVRF CSAF Converter SHALL convert any remediation with the type `Vendor Fix` into the category `optional_patch` if the product in
     question is in one of the product status groups "Not Affected" or "Fixed" for this vulnerability.
     Otherwise, the category `vendor_fix` SHALL be set.
@@ -766,7 +766,7 @@ Secondly, the program fulfills the following for all items of:
     > A tool MAY provide a non-default option to suppress this conversion step.
 
     If the CSAF 2.0 to CSAF 2.1 Converter is unable to create a valid product tree,
-    it SHALL output an error that an invalid product tree with stacked branch categories was detected and could not be resolved.
+    it SHALL issue an error that an invalid product tree with stacked branch categories was detected and could not be resolved.
     Such a error SHALL include the invalid path as well as the branch categories that were present multiple times.
 
     > A tool MAY provide a non-default option to output the invalid document.
@@ -793,7 +793,7 @@ Secondly, the program fulfills the following for all items of:
     > A tool MAY provide a non-default option to suppress this conversion step.
 
     If the CSAF 2.0 to CSAF 2.1 Converter is unable to create a valid product tree,
-    it SHALL output an error that an invalid product tree with branch categories `product_version` and `product_version_range` in
+    it SHALL issue an error that an invalid product tree with branch categories `product_version` and `product_version_range` in
     one path was detected and could not be resolved.
     Such a error SHALL include the invalid path as well as the branch category items.
 
@@ -819,7 +819,7 @@ Secondly, the program fulfills the following for all items of:
     > A tool MAY provide a non-default option to suppress this conversion step.
 
     If the CSAF 2.0 to CSAF 2.1 Converter is unable to create a valid product tree,
-    it SHALL output an error that an invalid product tree with an upper open ended product version range in
+    it SHALL issue an error that an invalid product tree with an upper open ended product version range in
     one path was detected and could not be resolved.
     Such a error SHALL include the invalid path as well as the original and new value.
 
@@ -844,7 +844,7 @@ Secondly, the program fulfills the following for all items of:
     > A tool MAY provide a non-default option to suppress this conversion step.
 
     If the CSAF 2.0 to CSAF 2.1 Converter is unable to create a valid product tree,
-    it SHALL output an error that an invalid product tree with a `product_version` declared as `product_version_range` in
+    it SHALL issue an error that an invalid product tree with a `product_version` declared as `product_version_range` in
     one path was detected and could not be resolved.
     Such a error SHALL include the invalid path as well as value of the product version.
 
